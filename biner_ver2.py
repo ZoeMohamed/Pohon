@@ -25,7 +25,6 @@ def IsUnerLeft(P):
         return False
 
 # Sub Pohon Kanan Tidak Boleh Kosong dan Sub Pohon Kiri harus Kosong
-
 def IsUnerRight(P):
     if not(IsTreeEmpty(P)) and not(IsTreeEmpty(right(P))) and IsTreeEmpty(left(P)):
         return True
@@ -37,6 +36,8 @@ def isBiner(P):
         return True
     else:
         return False
+    
+# Basis 0
 def NbDaun(P):
     if IsTreeEmpty(P):
         return 0
@@ -51,7 +52,7 @@ def NbDaun(P):
         elif IsUnerRight(P):
             return NbDaun(right(P)) 
 
-
+# Basis 0
 def NbElement(P):
     if IsTreeEmpty(P):
         return 0
@@ -66,9 +67,56 @@ def NbElement(P):
         # NbElement(right(P))
         # NbElement(['b',[],[]])
 
+# bASIS 1
+
+# error cond pengen nbelment 1 nya jadi lebih pendek
+# def NbElementerr(P):
+#     if IsOneElmnt(P):
+#         return 1
+#     else:
+#         return NbElementerr(left(P)) + 1 + NbElementerr(right(P))
+
+
+def NbElement1(P):
+    if IsOneElmnt(P):
+        return 1
+    else:
+        if isBiner(P):
+            return NbElement1(left(P)) + 1 + NbElement1(right(P))
+        elif IsUnerLeft(P):
+            return NbElement1(left(P)) + 1
+        elif IsUnerRight(P):
+            return 1 + NbElement1(right(P))
+        
+        [1,[2,[1,[],[]],[]],[]]
+    
+def NbDaun1(P):
+   if IsOneElmnt(P):
+        return 1
+   else:
+        if isBiner(P):
+            return NbDaun1(left(P)) + NbDaun1(right(P))
+        elif IsUnerLeft(P):
+            return NbDaun1(left(P)) 
+        elif IsUnerRight(P):
+            return NbDaun1(right(P)) 
+
+
+
 x = tree(1,tree('a',tree('c',[],[]),[]),tree('b',[],[]))
 y = tree(1,tree(1,[],[]),tree(2,[],[]))
-print(x)
+z = tree(1,tree(2,tree(3,[],[]),[]),[])
+# print(x)
+# print(NbElement(x))
+# print(NbDaun(y))
+
+# Basis 0
 print(NbElement(x))
-print(NbDaun(y))
+print(NbDaun(x))
+# Basis 1
+print(NbElement1(z))
+print(NbDaun(x))
+
+
+
 # A['B'['D','E'],'C'['G','H'[None,'I']]]
